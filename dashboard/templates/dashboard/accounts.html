@@ -1,0 +1,99 @@
+{% extends "dashboard/index.html" %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px; margin-bottom: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <p style="text-align: left; margin-top: 10px">Showing data : {{sdate}} to {{edate}}</p>
+        </div>
+        <div class="col-md-6" align="center">
+
+            <form method="post" novalidate action="{% url 'account' %}"> {% csrf_token %} {{ form }}
+                <label for="startdate">Start:</label>
+                <input type="date" name="sdate" class="myform" id="startdate">
+
+                <label for="enddate">End:</label>
+                <input type="date" name="edate" class="myform" id="enddate">
+
+
+                <button type="submit" name="accountSegmentsubmit" class="btn btn-primary"
+                        value="accountSegmentform" style="">Run Segmentation
+                </button>
+
+                <p style="text-align: right; color:red; float: right; margin-right: 85px;">{{ formValidation }}</p>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+
+        <div class="col-md-3">
+
+
+            {% include "others/sidebar.html" %}
+
+        </div>
+        <div class="col-md-9">
+
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+
+
+                    <div class="row">
+
+                        <div class="col-md-12" align="center">
+                            <h5 class="card-title" style="font-weight:bold">Per day User Withdrawal</h5>
+                            {{ w_chart.as_html }}
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+                <div class="card" style="width: auto; margin-bottom: 20px">
+                    <div class="card-body">
+                        <h5 class="card-title"><i style=" color: #888" class="fa fa-money fa-2x"></i>{{ total_outgoing }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Total Withdrawal of GO11</h6>
+                    </div>
+                </div>
+                <div class="card" style="width: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i style=" color: #888" class="fa fa-money fa-2x"></i>{{ due }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Dues to be paid</h6>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-7" align="center">
+                <div class="card" style="width: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title">Day Wise Due Charts</h5>
+                        <div class="col-md-9">
+                            <div class="col-md-9">
+                                {{ dueChart.as_html }}
+                                <!-- <h5 style="margin-left: 100px">Day Wise Users Cash Segmentation</h5> -->
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}
+

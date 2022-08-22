@@ -1,0 +1,104 @@
+{% extends "dashboard/index.html" %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px; margin-bottom: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <p style="text-align: left; margin-top: 10px">Showing data : {{sdate}} to {{edate}}</p>
+        </div>
+        <div class="col-md-6" align="center">
+
+            <form method="post" novalidate action="{% url 'promotions' %}"> {% csrf_token %} {{ form }}
+                <label for="startdate">Start:</label>
+                <input type="date" name="sdate" class="myform" id="startdate">
+
+                <label for="enddate">End:</label>
+                <input type="date" name="edate" class="myform" id="enddate">
+                <label for="dropdownSelect">Select an Option:</label>
+                <select type="submit" id="dropdownSelect" name="dropdown" class="myform">
+                    <option value="1">Select a Search Option!</option>
+                    <option value="Segment1" Enable>Segment 1</option>
+                    <option value="Segment2">Segment 2</option>
+                    <option value="Segment3">Segment 3</option>
+                </select>
+
+                <button type="submit" name="promotionsSegmentsubmit" class="btn btn-primary"
+                        value="promotionsSegmentform" style="">Run Segmentation
+                </button>
+
+                <p style="text-align: right; color:red; float: right; margin-right: 85px;">{{ formValidation }}</p>
+            </form>
+
+            <h7 class="card-subtitle mb-2 text-muted">**Segment 1: users who recharge but did not play after 2021-01-31</h6>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+
+        <div class="col-md-3">
+
+
+            {% include "others/sidebar.html" %}
+
+        </div>
+        
+        <div class="col-md-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(8, 8, 8)" style="margin-right: 20px" class="fa fa-user-o fa-2x"></i>{{ segment1 }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Segment 1 or users count of Promotions </h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-users fa-2x" aria-hidden="true"></i>{{ segment1 }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Percentage of Segment 1 Used Users</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-briefcase fa-2x" aria-hidden="true"></i>{{ packageTaken }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Total Number of Users who took 28tk package offer</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-briefcase fa-2x" aria-hidden="true"></i>{{ uniqueUser }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Total Number of Unique Users who took 28tk package offer</h6>
+                </div>
+            </div>
+        </div>
+    </div> 
+    
+    <div class="row">
+        <div class="col-md-3"></div>
+            <div class="col-md-8" align="center">
+                <div class="card" style="width: auto; margin-top: 10px">
+                    <div class="card-body">
+                        <h5 class="card-title">Coin Package promotions (28) Graph</h5>
+                        <div class="col-md-8">
+                            <div class="col-md-8">
+                                {{ cpChart.as_html }}
+                                <!-- <h5 style="margin-left: 100px">Day Wise Users Cash Segmentation</h5> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,144 @@
+{% extends "dashboard/index.html" %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px; margin-bottom: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <p style="text-align: left; margin-top: 10px">Showing data : {{sdate}} to {{edate}}</p>
+        </div>
+        <div class="col-md-6" align="center">
+
+            <form method="post" novalidate action="{% url 'user' %}"> {% csrf_token %} {{ form }}
+                <label for="startdate">Start:</label>
+                <input type="date" name="sdate" class="myform" id="startdate">
+
+                <label for="enddate">End:</label>
+                <input type="date" name="edate" class="myform" id="enddate">
+
+
+                <button type="submit" name="userSegmentsubmit" class="btn btn-primary"
+                        value="userSegmentform" style="">Run Segmentation
+                </button>
+
+                <p style="text-align: right; color:red; float: right; margin-right: 85px;">{{ formValidation }}</p>
+            </form>
+
+
+        </div>
+    </div>
+    <div class= "row">
+        <div class="col-md-3">{% include "others/sidebar.html" %}</div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;margin-top: 10px">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-users fa-2x" aria-hidden="true"></i>{{ uniqueUser }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Number of unique user who din payments</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;margin-top: 10px">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-futbol-o fa-2x" aria-hidden="true"></i>{{ playedContestUnique }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Number of unique user who played paid contests</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;margin-top: 10px">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: rgb(219, 14, 14)" style="margin-right: 20px" class="fa fa-user-secret fa-2x" aria-hidden="true"></i>{{ uniqueUserPrize }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Number of unique user who got prize money</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-9">
+
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+
+
+                    <div class="row">
+
+                        <div class="col-md-12" align="center">
+                            <h5 class="card-title" style="font-weight:bold">Day Wise Total Users Segmentation</h5>
+                            {{ userChart.as_html }}
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-2">
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h5 class="card-title"><i style=" color: #888" class="fa fa-user fa-2x"></i>{{ totalUser }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Total Users of GO11</h6>
+                </div>
+            </div>
+        </div>
+            
+            <div class="col-md-7" align="center">
+                <div class="card" style="width: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title">Users Cash Chart</h5>
+                        <div class="col-md-9">
+                            <div class="col-md-9">
+                                {{ cashChart.as_html }}
+                                <h5 style="margin-left: 100px">Day Wise Users Cash Segmentation</h5>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3"></div>
+        <!-- <div class="col-md-2">
+                <div class="card" style="width: auto;">
+                    <div class="card-body">
+                        <h5 class="card-title"><i style=" color: #888" class="fa fa-user"></i>{{ totalUser }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Total Users of GO11</h6>
+                    </div>
+                </div>
+            </div> -->
+            
+            <div class="col-md-9" align="center">
+                <div class="card" style="width: auto; margin-top: 10px">
+                    <div class="card-body">
+                        <h5 class="card-title">Daily User Cash In</h5>
+                        <div class="col-md-9">
+                            <div class="col-md-9">
+                                {{ d_chart.as_html }}
+                                <!-- <h5 style="margin-left: 100px">Day Wise Users Cash Segmentation</h5> -->
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    
+
+
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,182 @@
+{% extends "dashboard/index.html" %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px; margin-bottom: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <p style="text-align: left; margin-top: 10px">Showing data : {{sdate}} to {{edate}}</p>
+        </div>
+        <div class="col-md-6" align="center">
+
+            <form method="post" novalidate action="{% url 'conversion' %}"> {% csrf_token %} {{ form }}
+                <label for="startdate">Start:</label>
+                <input type="date" name="sdate" class="myform" id="startdate">
+
+                <label for="enddate">End:</label>
+                <input type="date" name="edate" class="myform" id="enddate">
+
+
+                <button type="submit" name="conversionSegmentsubmit" class="btn btn-primary"
+                        value="conversionSegmentform" style="">Run Segmentation
+                </button>
+
+                <p style="text-align: right; color:red; float: right; margin-right: 85px;">{{ formValidation }}</p>
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+
+        <div class="col-md-3">
+
+
+            {% include "others/sidebar.html" %}
+
+        </div>
+        <div class="col-md-9">
+
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h3 class="h3">Cash To Coin Conversion Data</h3>
+                    <br>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Date</th>
+                            <th>User</th>
+
+                        </tr>
+
+                        {% for date, user in conversion %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{ date }}</td>
+                            <td>{{ user }}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                    <!-- {% if conversion.has_other_pages %}
+                        <ul class="pagination">
+                            {% if conversion.has_previous %}
+                                <li><a href="?page={{ conversion.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in conversion.paginator.page_range %}
+                                {% if conversion.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if conversion.has_next %}
+                                <li><a href="?page={{ conversion.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %} -->
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if conversion.has_previous %}
+                                <a href="?page={{ conversion.previous_page_number }}">previous</a>
+                            {% endif %}
+                    
+                            <span class="current">
+                                Page {{ conversion.number }} of {{ conversion.paginator.num_pages }}.
+                            </span>
+                    
+                            {% if conversion.has_next %}
+                                <a href="?page={{ conversion.next_page_number }}">next</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-bottom: 20px;">
+
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-9">
+
+            <div class="card" style="width: auto;">
+                <div class="card-body">
+                    <h3 class="h3">Total match data and Profit Mergin</h3>
+                    <br>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>SL No.</th>
+                            <th>Match Id</th>
+                            <th>Match Name</th>
+                            <th>Match Time</th>
+                            <th>Total Given Contest</th>
+                            <th>Total Entry Amount</th>
+                            <th>Total Seat</th>
+                            <th>Total Winning Amount</th>
+                            <th>Total Team Capacity</th>
+                            <th>Profit Mergin</th>
+                        </tr>
+                        {% for matchId, name, matchTime, totalcontestgiven, totalEntryAmount, totalSeat, totalWinningAmount, totalTeamCapacity, profitMergin in datax %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ matchId }}</td>
+                            <td>{{ name }}</td>
+                            <td>{{ matchTime }}</td>
+                            <td>{{ totalcontestgiven }}</td>
+                            <td>{{ totalEntryAmount }}</td>
+                            <td>{{ totalSeat }}</td>
+                            <td>{{ totalWinningAmount }}</td>
+                            <td>{{ totalTeamCapacity }}</td>
+                            <td>{{ profitMergin }}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+
+        <div class="col-md-3">
+
+            {% include "others/sidebar.html" %}
+
+        </div>
+
+
+        <div class="col-md-9" style="margin-bottom: 100px;">
+
+            <div class="card">
+
+                <h3 style="margin-left: 40px; margin-bottom: 40px;">Entry amount vs Profit Mergin</h3>
+
+                <div class="card-body">
+
+                    {{pMerginChart.as_html}}
+
+                </div>
+            </div>
+        </div>
+
+    </div> -->
+
+
+
+</div>
+
+
+{% endblock %}
+

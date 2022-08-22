@@ -1,0 +1,23 @@
+
+<div class="list-group">
+
+        <a href="{% url 'index' %}" class="{{isact}} list-group-item list-group-item-action"><i
+                class="fa fa fa fa-home"></i> Home</a>
+
+        <a href="{% url 'account'%}" class="{{isact_account}} list-group-item list-group-item-action dropbtn"><i
+        class="fa fa-money"></i> Accounts</a>
+
+        <a href="{% url 'user'%}" class="{{isact_user}} list-group-item list-group-item-action dropbtn"><i
+                class="fa fa fa fa-user-plus"></i> User Segments</a>
+
+        <a href="{% url 'conversion'%}" class="{{isact_conversion}} list-group-item list-group-item-action dropbtn"><i
+                class="fa fa-bar-chart-o"></i> Conversion </a>
+        
+        <a href="{% url 'promotions'%}" class="{{isact_conversion}} list-group-item list-group-item-action dropbtn"><i
+                class="fa fa-puzzle-piece"></i> Promotions </a>
+                
+        <a href="{% url 'cohorts'%}" class="{{isact_cohorts}} list-group-item list-group-item-action">
+                <i class="fa fa-user-o"></i> Cohort Analysis</a>
+</div>
+
+

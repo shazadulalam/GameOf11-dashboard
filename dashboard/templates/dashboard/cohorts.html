@@ -1,0 +1,197 @@
+{% extends "dashboard/index.html" %}
+{% block content %}
+{% load django_template_maths %}
+
+<div class="container-fluid">
+
+    <div class="row" style="margin-top:10px; margin-bottom: 30px">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <p style="text-align: left; margin-top: 10px">Showing data : {{sdate}} to {{edate}}</p>
+        </div>
+        <div class="col-md-6" align="center">
+
+            <form method="post" novalidate action="{% url 'cohorts' %}"> {% csrf_token %} {{ form }}
+
+                <label for="month">Select Month:</label>
+                <select id="month" name="month" class="myform" style="margin-right: 5px">
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+
+                </select>
+
+                <label for="year">Select Year:</label>
+                <select id="year" name="year" class="myform" style="margin-right: 5px">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+
+                </select>
+
+
+                <button type="submit" name="cohortsubmit"
+                        value="cohortsvalue" class="btn btn-default">Find Cohort
+
+                </button>
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+            {% include "others/sidebar.html" %}
+
+        </div>
+
+        <div class="col-md-8">
+
+            <h2> User Cohort </h2>
+
+            <table class="table table-bordered" style="margin: 60px;">
+                <tr>
+                    <th></th>
+                    <th>Month 0</th>
+                    <th>Month 1</th>
+                    <th>Month 2</th>
+                    <th>Month 3</th>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Month 0
+                    </td>
+                    <td>{{datam1.0}}</td>
+                    <td>{{datam1.1}}</td>
+                    <td>{{datam1.2}}</td>
+                    <td>{{datam1.3}}</td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        Month 1
+
+                    </td>
+                    <td>{{datam2.0}}</td>
+                    <td>{{datam2.1}}</td>
+                    <td>{{datam2.2}}</td>
+
+
+                </tr>
+                <tr>
+                    <td>
+
+                        Month 2
+
+                    </td>
+                     <td>{{datam3.0}}</td>
+                    <td>{{datam3.1}}</td>
+
+
+
+                </tr>
+                <tr>
+                    <td>
+
+                        Month 3
+
+                    </td>
+
+                    <td>
+                        {{datam4}}
+
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+            <table class="table table-bordered" style="margin: 60px;">
+                <tr>
+                    <th></th>
+                    <th>Month 0</th>
+                    <th>Month 1</th>
+                    <th>Month 2</th>
+                    <th>Month 3</th>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Month 0
+                    </td>
+                    <td>100%</td>
+                    <td>
+                        {{datam1.1|mul:100|div:datam1.0|floatformat}}%
+                        </td>
+                    <td>{{datam1.2|mul:100|div:datam1.0|floatformat}}%</td>
+                    <td>{{datam1.3|mul:100|div:datam1.0|floatformat}}%</td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        Month 1
+
+                    </td>
+                    <td>100%</td>
+                    <td>
+                        {{datam2.1|mul:100|div:datam2.0|floatformat}}%</td>
+                    <td>{{datam2.2|mul:100|div:datam2.0|floatformat}}%</td>
+
+
+                </tr>
+                <tr>
+                    <td>
+
+                        Month 2
+
+                    </td>
+                     <td>100%</td>
+                    <td>{{datam3.1|mul:100|div:datam3.0|floatformat}}%</td>
+
+
+
+                </tr>
+                <tr>
+                    <td>
+
+                        Month 3
+
+                    </td>
+
+                    <td>
+                       100%
+
+                    </td>
+                </tr>
+
+
+            </table>
+
+
+        </div>
+        <div class="col-md-1">
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
